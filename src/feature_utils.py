@@ -53,15 +53,15 @@ def extract_features_pair():
 
     START_DATE = (datetime.date.today() - datetime.timedelta(days=365)).strftime("%Y-%m-%d")
     END_DATE = datetime.date.today().strftime("%Y-%m-%d")
-    stk_tickers = ['ABNB', 'NKE']
+    stk_tickers = ['NKE', 'APTV']
     
     stk_data = yf.download(stk_tickers, start=START_DATE, end=END_DATE, auto_adjust=False)
 
     Y = stk_data.loc[:, ('Adj Close', 'ABNB')]
-    Y.name = 'ABNB'
+    Y.name = 'NKE'
 
     X = stk_data.loc[:, ('Adj Close', 'NKE')]
-    X.name = 'NKE'
+    X.name = 'APTV'
 
     dataset = pd.concat([Y, X], axis=1).dropna()
     Y = dataset.loc[:, Y.name]
